@@ -8,6 +8,7 @@ import Container from '../Styled/Container';
 import Loader from '../Shared/Loader';
 import Error from '../Styled/Error';
 import Article from './Article';
+import { CenteredContent } from '../Styled/Util';
 
 const Heading = styled.h2`
     text-align: center;
@@ -22,17 +23,11 @@ export const ListWrapper = styled.div`
     margin: 0 auto;
 `;
 
-const Feedback = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
 export const NoData = styled.p`
     text-align: center;
 `;
 
- export class _ArticleList extends Component {
+export class _ArticleList extends Component {
      static propTypes = {
          articles: PropTypes.array.isRequired,
          isLoading: PropTypes.bool.isRequired,
@@ -58,11 +53,11 @@ export const NoData = styled.p`
                         <Article key={article.advId} article={article} />
                     ))}
                 </ListWrapper>}
-                <Feedback>
+                <CenteredContent>
                     {isLoading && <Loader />}
                     {error && <Error>{error}</Error>}
                     {articles.length === 0 && !isLoading && !error && <NoData>No articles available.</NoData>}
-                </Feedback>
+                </CenteredContent>
             </Container>
         );
     }

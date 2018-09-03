@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { headerHeight, light, primary } from '../Styled/variables';
+import { headerHeight, light, primary, phablet } from '../Styled/variables';
 import logo from '../../assets/hg.png';
 
 const HeaderContainer = styled.div`
@@ -22,7 +22,7 @@ const HeaderContainer = styled.div`
 const Logo = styled.img`
     max-height: 60%;
     
-    @media(min-width: 480px) {
+    @media(min-width: ${phablet}) {
         max-height: 80%;
     }
 `;

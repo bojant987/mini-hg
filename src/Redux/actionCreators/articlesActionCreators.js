@@ -21,7 +21,7 @@ export const fetchArticles = () => dispatch => {
     dispatch(fetchArticlesRequest());
 
     return axios({
-        url: `${BASE_URL}?loc=Zurich&cht=RENTFLAT`,
+        url: `${BASE_URL}?loc=Basel&cht=RENTFLAT`,
         method: 'GET',
         headers: {
             authorization: 'Basic aGdfYW5kcm9pZDo2VmNHVTZjZUNGVGs4ZEZt',

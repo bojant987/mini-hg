@@ -8,11 +8,12 @@ import styled from 'styled-components';
 import { fetchArticle } from '../../Redux/actionCreators/articlesActionCreators';
 import Loader from '../Shared/Loader';
 import Container from '../Styled/Container';
-import { Text } from '../Styled/Util';
+import { Text, CenteredContent } from '../Styled/Util';
 import Error from '../Styled/Error';
-import { light } from '../Styled/variables';
+import Thumbnail from '../Styled/Thumbnail';
+import { light, phablet, tablet } from '../Styled/variables';
 
-const DetailsWrapper = styled.div`
+export const DetailsWrapper = styled.div`
     padding: 30px 0;
     max-width: 800px;
     margin: 0 auto;
@@ -23,18 +24,7 @@ const ThumbnailWrapper = styled.div`
     height: 300px;
     overflow: hidden;
     margin-bottom: 15px;
-    cursor: pointer;
     margin-bottom: 15px;
-`;
-
-const Thumbnail = styled.img`
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
 `;
 
 const InfoWrapper = styled.div`
@@ -49,7 +39,7 @@ const BlockSmall = styled.div`
     margin-bottom: 15px;
     padding: 10px;
     
-    @media(min-width: 480px) {
+    @media(min-width: ${phablet}) {
         width: 48%;
     }
 `;
@@ -65,16 +55,9 @@ const InfoEntry = styled.div`
     justify-content: space-between;
     margin-bottom: 10px;
     
-    @media(min-width: 870px) {
+    @media(min-width: ${tablet}) {
         margin-bottom: 0;
     }
-`;
-
-const Feedback = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
 `;
 
 const settings = {
@@ -85,7 +68,7 @@ const settings = {
     slidesToScroll: 1,
 };
 
-class ArticleDetails extends Component {
+export class _ArticleDetails extends Component {
     static propTypes = {
         article: PropTypes.shape({
             advID: PropTypes.string,
@@ -105,6 +88,7 @@ class ArticleDetails extends Component {
         }),
         error: PropTypes.string,
         isLoading: PropTypes.bool,
+        fetchArticle: PropTypes.func.isRequired,
     };
 
     componentDidMount() {
@@ -118,10 +102,10 @@ class ArticleDetails extends Component {
 
         return (
             <Container>
-                <Feedback>
+                <CenteredContent>
                     {isLoading && <Loader />}
                     {error && <Error>{error}</Error>}
-                </Feedback>
+                </CenteredContent>
                 {!isLoading && article &&
                 <DetailsWrapper>
                     <ThumbnailWrapper>
@@ -190,4 +174,4 @@ const mapDispatchToProps = dispatch => ({
     fetchArticle: id => dispatch(fetchArticle(id)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ArticleDetails));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(_ArticleDetails));

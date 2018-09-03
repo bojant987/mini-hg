@@ -4,8 +4,10 @@ import { withRouter } from 'react-router-dom';
 import Slider from "react-slick";
 import styled from 'styled-components';
 
-import { light, lightGray, primary, ternary } from '../Styled/variables';
 import showFormattedDate from '../../Redux/util/showFormattedDate';
+import { light, lightGray, primary, secondary, tablet, laptop } from '../Styled/variables';
+import Thumbnail from '../Styled/Thumbnail';
+import { Text } from '../Styled/Util';
 
 const ArticleWrapper = styled.div`
     display: flex;
@@ -18,7 +20,7 @@ const ArticleWrapper = styled.div`
     transition: 0.3s;
     overflow: hidden;
     
-    @media(min-width: 870px) {
+    @media(min-width: ${tablet}) {
         padding: 10px;
         flex-wrap: nowrap;
         justify-content: flex-start;
@@ -38,21 +40,11 @@ const ThumbnailWrapper = styled.div`
     margin-bottom: 5px;
     cursor: pointer;
     
-    @media(min-width: 870px) {
+    @media(min-width: ${tablet}) {
         margin-bottom: 0;
         max-width: 500px;
         margin-right: 10px;
     }
-`;
-
-const Thumbnail = styled.img`
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
 `;
 
 const Info = styled.div`
@@ -64,30 +56,17 @@ const Info = styled.div`
     flex-direction: column;
     justify-content: space-between;
     
-    @media(min-width: 870px) {
+    @media(min-width: ${tablet}) {
         border-left: 1px solid ${lightGray}; 
     }
     
-    @media(min-width: 1160px) {
+    @media(min-width: ${laptop}) {
         border-right: 1px solid ${lightGray};
     }
 `;
 
-const Title = styled.p`
-    font-weight: 700;
-    color: ${primary};
-    margin-bottom: 7px;
-    cursor: pointer;
-`;
-
 const Description = styled.p`
     overflow: hidden;
-`;
-
-const Surface = styled.p`
-    font-weight: 700;
-    font-size: 16px;
-    color: ${ternary};
 `;
 
 const InfoEntry = styled.div`
@@ -96,25 +75,16 @@ const InfoEntry = styled.div`
     justify-content: space-between;
     margin-bottom: 10px;
     
-    @media(min-width: 870px) {
+    @media(min-width: ${tablet}) {
         margin-bottom: 0;
     }
-`;
-
-const FieldValue = styled.p`
-    font-weight: bold;
-`;
-
-const Time = styled.p`
-    font-weight: 500;
-    color: ${lightGray};
 `;
 
 const Details = styled.div`
     flex: 1 0 29%;
     display: none;
     
-    @media(min-width: 1160px) {
+    @media(min-width: ${laptop}) {
         display: block;
     }
 `;
@@ -146,42 +116,36 @@ const Article = ({ article, history }) => {
                     ))}
                 </Slider>
             </ThumbnailWrapper>
-            {/*<ThumbnailWrapper>*/}
-                {/*<Thumbnail*/}
-                    {/*src={article.pictures[0]}*/}
-                    {/*alt={article.title}*/}
-                {/*/>*/}
-            {/*</ThumbnailWrapper>*/}
             <Info onClick={goToDetails}>
                 <InfoEntry>
                     <p>Added</p>
-                    <Time>{showFormattedDate(article.timestamp)}</Time>
+                    <Text color={lightGray} fontWeight="500">{showFormattedDate(article.timestamp)}</Text>
                 </InfoEntry>
                 <InfoEntry>
                     <p>Type</p>
-                    <FieldValue>{article.objectCategory === 'APPT' ? 'Apartment' : 'House'}</FieldValue>
+                    <Text fontWeight="bold">{article.objectCategory === 'APPT' ? 'Apartment' : 'House'}</Text>
                 </InfoEntry>
                 {article.numberRooms &&
                 <InfoEntry>
                     <p>Rooms</p>
-                    <FieldValue>{article.numberRooms}</FieldValue>
+                    <Text fontWeight="bold">{article.numberRooms}</Text>
                 </InfoEntry>}
                 <InfoEntry>
                     <p>Street</p>
-                    <FieldValue>{article.street}</FieldValue>
+                    <Text fontWeight="bold">{article.street}</Text>
                 </InfoEntry>
                 {article.surfaceLiving &&
                 <InfoEntry>
                     <p>Surface</p>
-                    <Surface>{article.surfaceLiving} m2</Surface>
+                    <Text color={secondary} fontSize="16px" fontweight="bold">{article.surfaceLiving} m&#178;</Text>
                 </InfoEntry>}
                 <InfoEntry>
                     <p>Contact</p>
-                    <FieldValue>{article.contactPerson}</FieldValue>
+                    <Text fontWeight="bold">{article.contactPerson}</Text>
                 </InfoEntry>
             </Info>
             <Details onClick={goToDetails}>
-                <Title>{article.title}</Title>
+                <Text fontWeight="bold" color={primary} margin="0 0 7px">{article.title}</Text>
                 <Description>{article.description}</Description>
             </Details>
         </ArticleWrapper>

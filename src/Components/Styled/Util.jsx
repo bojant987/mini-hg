@@ -16,4 +16,14 @@ export const Text = styled.p`
     ${props => props.center && css`
         text-align: center;
     `}
+    
+    ${props => props.color && css`
+        color: ${props.color};
+    `}
+`;
+
+export const CenteredContent = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;

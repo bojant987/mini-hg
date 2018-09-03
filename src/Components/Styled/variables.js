@@ -1,7 +1,6 @@
 // theme colors
 export const primary = '#879cbc';
-export const secondary = '#FFCC06';
-export const ternary = '#c1a34f';
+export const secondary = '#c1a34f';
 
 // general colors
 export const light = '#ffffff';
@@ -14,4 +13,6 @@ export const headerHeight = '60px';
 export const footerHeight = '60px';
 
 // screen widths
-export const phablet = '540px';
+export const phablet = '480px';
+export const tablet = '870px';
+export const laptop = '1160px';

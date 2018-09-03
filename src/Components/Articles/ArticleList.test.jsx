@@ -48,7 +48,7 @@ describe('ArticleList', () => {
 
     test('Shows articles list when everything is peachy', () => {
         const articles = [
-            { id: 1 }, { id: 2 }
+            { advId: '1' }, { advId: '2' }
         ];
         const component = shallow(<ArticleList {...compProps} articles={articles} />);
 
